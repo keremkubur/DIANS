@@ -1,0 +1,15 @@
+Прво ја симнуваме датотеката со геогравски податоци за македонија OpenStreetmap macedonia-latest.osm.pbf 
+Податочното множество го конвертираме во .osm tip со алатката osmosis со наредбата:
+osmosis --read-pbf macedonia-latest.osm.pbf  --write-xml macedonia.osm
+Користиме osmfilter за да ги филтрираме потребните полиња и потоа со osmconvert ги конвертираме во .csv формат
+Командите ги извршуваме во Windows subsystem for linux:
+филтер за parkin_space:
+osmfilter macedonia.osm  --keep="amenity=parking_space" | osmconvert - --all-to-nodes --csv="@id @lon @lat name" --csv-headline --csv-separator="," -o="parking_space.csv"
+филтер за bus_station:
+osmfilter macedonia.osm  --keep="amenity=bus_station" | osmconvert - --all-to-nodes --csv="@id @lon @lat name" --csv-headline --csv-separator="," -o="bus_station.csv"
+филтер за public_transport:
+osmfilter macedonia.osm  --keep="public_transport=station" | osmconvert - --all-to-nodes --csv="@id @lon @lat name" --csv-headline --csv-separator="," -o="public_transport.csv"
+филтер за fuel:
+osmfilter macedonia.osm  --keep="amenity=fuel" | osmconvert - --all-to-nodes --csv="@id @lon @lat name" --csv-headline --csv-separator="," -o="fuel.csv"
+филтер за car_rental:
+osmfilter macedonia.osm  --keep="amenity=car_rental" | osmconvert - --all-to-nodes --csv="@id @lon @lat name" --csv-headline --csv-separator="," -o="car_rental.csv"
