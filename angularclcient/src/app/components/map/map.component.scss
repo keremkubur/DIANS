@@ -8,6 +8,30 @@
   //margin: 30px;
 }
 
+.button2 {
+  width: 150px;
+  background-color: #125699;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
+
+.button1 {
+  width: 250px;
+  background-color: #008cba;
+  border: none;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+}
+
 .map-frame {
   border: 2px solid black;
   height: 100%;
@@ -19,10 +43,12 @@
 
 .w3-container {
   position: absolute;
+  width: 350px;
+  height: 940px;
   top: 10px;
-  left: 25%;
+  left: 0%;
   z-index: 1;
-  background-color: #fff;
+  background-color: ghostwhite;
   padding: 5px;
   border: 1px solid #999;
   text-align: center;

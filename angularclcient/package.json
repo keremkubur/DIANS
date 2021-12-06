@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -20,6 +20,8 @@
     "@angular/router": "~13.0.0",
     "leaflet": "^1.7.1",
     "leaflet-boundary-canvas": "^1.0.0",
+    "leaflet-draw": "^1.0.4",
+    "ngx-csv-parser": "^0.0.7",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
