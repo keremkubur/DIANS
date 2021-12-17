@@ -5,7 +5,7 @@ import {MapComponent} from './map.component';
 describe('MapComponent', () => {
   let component: MapComponent;
   let fixture: ComponentFixture<MapComponent>;
-
+require('angularclcient/node_modules/leaflet-boundary-canvas');
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MapComponent]

@@ -1,3 +1,4 @@
+<script src="node_modules/leaflet-boundary-canvas/src/BoundaryCanvas.js"></script>
 <div class="map-container">
   <div class="map-frame">
     <div id="map"></div>
@@ -37,7 +38,15 @@
   <div class="button2">
     <button (click)="clearMap()" class="button2">Clear Map</button>
   </div>
-
+  <div class="button2">
+    <button (click)="startMarker()" class="button2">Start Point</button>
+  </div>
+  <div class="button2">
+    <button (click)="endMarker()" class="button2">End Point</button>
+  </div>
+  <div class="button2">
+    <button (click)="locateMeMarker()" class="button2">locate Point</button>
+  </div>
   <pre></pre>
   <pre></pre>
   <pre></pre>

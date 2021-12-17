@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/SretenJ/dians_lab_test#readme",
   "dependencies": {
+    "leaflet-boundary-canvas": "^1.0.0",
     "leaflet-draw": "^1.0.4"
   }
 }

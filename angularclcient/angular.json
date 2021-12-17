@@ -25,6 +25,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/assets/map.geojson",
               {
                 "glob": "bus_station.csv",
                 "input": "../",
@@ -32,9 +33,13 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "../angularclcient/node_modules/leaflet.markercluster/dist/MarkerCluster.css",
+              "../angularclcient/node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css"
             ],
-            "scripts": []
+            "scripts": [
+              "../node_modules/leaflet-boundary-canvas/src/BoundaryCanvas.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -99,7 +104,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/MarkerCluster.css",
+              "src/assets/MarkerCluster.Default.css",
+              "../angularclcient/node_modules/leaflet.markercluster/dist/MarkerCluster.css",
+              "../angularclcient/node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css"
             ],
             "scripts": []
           }

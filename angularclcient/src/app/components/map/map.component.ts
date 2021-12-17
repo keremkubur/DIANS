@@ -1,14 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-//import * as L from 'leaflet';
 import {BusStation} from "./model/bus-station";
 import {BusAPIService} from "../../shared/bus-api.service";
 import 'leaflet-draw'
 import 'leaflet'
 import {FuelStation} from "./model/fuel-station";
-import {isAsciiLetter} from "@angular/compiler/src/chars";
 import {ParkingSpot} from "./model/parking-spot";
 import {CarRental} from "./model/car-rental";
 import {PublicTransport} from "./model/public-transport";
+import 'leaflet-boundary-canvas/src/BoundaryCanvas';
+import 'leaflet.markercluster/dist/leaflet.markercluster';
+import 'leaflet.locatecontrol';
+import {config, Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 declare const L: any;
 
@@ -26,33 +29,31 @@ export class MapComponent implements OnInit {
   carrentals: CarRental[] = [];
   publictransport: PublicTransport[] = [];
   private centroid: L.LatLngExpression = [41.608635, 21.745275];
-
   private initMap(): void {
     this.map = L.map('map', {
       center: this.centroid,
       zoom: 9
     });
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      minZoom: 8,
+      maxZoom: 15,
+      minZoom: 6,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
     tiles.addTo(this.map);
+    /*var geom = {"type":"MultiPolygon","coordinates":[[[[20.435,41.52],[20.44,41.535],[20.435,41.56],[20.445,41.575],[20.52,41.585],[20.53,41.595],[20.53,41.605],[20.51,41.62],[20.505,41.645],[20.495,41.655],[20.51,41.69],[20.495,41.715],[20.495,41.74],[20.515,41.79],[20.535,41.81],[20.545,41.81],[20.54,41.88],[20.56,41.895],[20.605,41.895],[20.62,41.88],[20.645,41.895],[20.675,41.895],[20.695,41.88],[20.715,41.885],[20.72,41.9],[20.745,41.92],[20.735,41.94],[20.74,41.965],[20.73,41.97],[20.73,42.04],[20.74,42.045],[20.74,42.065],[20.76,42.075],[20.765,42.09],[20.785,42.105],[20.81,42.1],[20.825,42.105],[20.835,42.12],[20.88,42.115],[20.9,42.13],[20.905,42.145],[20.94,42.16],[20.965,42.155],[21.015,42.17],[21.04,42.185],[21.055,42.205],[21.07,42.205],[21.095,42.225],[21.175,42.215],[21.2,42.175],[21.235,42.14],[21.235,42.12],[21.265,42.115],[21.285,42.13],[21.285,42.155],[21.3,42.165],[21.295,42.175],[21.31,42.19],[21.315,42.215],[21.355,42.24],[21.375,42.265],[21.395,42.27],[21.415,42.265],[21.425,42.29],[21.44,42.3],[21.52,42.29],[21.535,42.27],[21.565,42.27],[21.585,42.285],[21.6,42.275],[21.665,42.27],[21.695,42.26],[21.72,42.285],[21.755,42.28],[21.78,42.315],[21.79,42.32],[21.81,42.315],[21.82,42.34],[21.835,42.345],[21.86,42.345],[21.87,42.335],[21.91,42.325],[21.91,42.34],[21.925,42.36],[21.955,42.365],[22.025,42.325],[22.055,42.33],[22.07,42.32],[22.11,42.335],[22.165,42.34],[22.185,42.36],[22.22,42.36],[22.24,42.38],[22.29,42.395],[22.31,42.39],[22.32,42.375],[22.315,42.355],[22.33,42.355],[22.365,42.33],[22.395,42.325],[22.42,42.3],[22.42,42.29],[22.47,42.25],[22.485,42.22],[22.5,42.22],[22.52,42.205],[22.535,42.16],[22.565,42.15],[22.58,42.13],[22.595,42.13],[22.61,42.115],[22.635,42.115],[22.685,42.085],[22.72,42.09],[22.745,42.065],[22.81,42.065],[22.83,42.04],[22.835,42.045],[22.88,42.04],[22.895,42.01],[22.9,41.935],[22.915,41.925],[22.92,41.895],[22.945,41.875],[22.965,41.835],[22.965,41.815],[22.98,41.805],[22.985,41.79],[23.015,41.79],[23.055,41.73],[23.055,41.7],[23.005,41.655],[23.005,41.64],[22.99,41.625],[22.975,41.625],[22.97,41.6],[22.98,41.595],[22.995,41.565],[22.985,41.53],[22.99,41.5],[22.98,41.49],[23,41.455],[23,41.44],[22.98,41.415],[22.985,41.345],[22.94,41.32],[22.845,41.32],[22.79,41.31],[22.775,41.24],[22.77,41.16],[22.74,41.125],[22.7,41.12],[22.66,41.16],[22.655,41.14],[22.63,41.115],[22.59,41.095],[22.565,41.1],[22.555,41.11],[22.52,41.11],[22.47,41.095],[22.405,41.1],[22.385,41.115],[22.365,41.11],[22.355,41.115],[22.34,41.1],[22.32,41.1],[22.305,41.125],[22.265,41.135],[22.26,41.145],[22.185,41.14],[22.15,41.105],[22.115,41.105],[22.06,41.13],[22.02,41.11],[21.98,41.11],[21.96,41.09],[21.93,41.08],[21.93,41.035],[21.87,41],[21.855,40.975],[21.825,40.97],[21.825,40.935],[21.805,40.925],[21.805,40.915],[21.745,40.905],[21.715,40.92],[21.695,40.92],[21.685,40.88],[21.65,40.88],[21.6,40.845],[21.585,40.85],[21.56,40.845],[21.52,40.89],[21.46,40.885],[21.445,40.895],[21.415,40.895],[21.375,40.86],[21.34,40.855],[21.325,40.845],[21.25,40.84],[21.23,40.86],[21.2,40.86],[21.16,40.835],[20.97,40.835],[20.955,40.855],[20.96,40.89],[20.935,40.905],[20.9,40.895],[20.85,40.915],[20.845,40.895],[20.825,40.88],[20.76,40.88],[20.725,40.89],[20.71,40.905],[20.66,41.06],[20.59,41.07],[20.58,41.08],[20.565,41.1],[20.56,41.155],[20.54,41.175],[20.515,41.185],[20.495,41.225],[20.49,41.295],[20.47,41.34],[20.485,41.365],[20.51,41.365],[20.525,41.375],[20.535,41.405],[20.49,41.43],[20.48,41.475],[20.45,41.485],[20.45,41.495],[20.435,41.505],[20.435,41.52]]]]};
+    L.tileLayer.boundaryCanvas(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+        boundary:geom,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        trackAttribution: true
+      }
+    ).addLayer(geom);*/
+
   }
 
-  constructor(private busapi: BusAPIService) {
-
+  constructor(private busapi: BusAPIService, private http: HttpClient) {
   }
-
-  private customMarker = L.Icon.extend({
-    options: {
-      shadowUrl: null,
-      iconAnchor: new L.Point(12, 12),
-      iconSize: new L.Point(24, 24),
-      //  iconUrl: 'http://joshuafrazier.info/images/firefox.svg',
-      iconUrl: 'angularclcient/src/assets/bus.png'
-    }
-  });
 
   ngOnInit(): void {
     this.initMap();
@@ -117,49 +118,27 @@ export class MapComponent implements OnInit {
   }
 
   public addBusMarker() {
-    L.marker([41.4420472, 22.648084]).addTo(this.map);
-    L.marker([41.885596, 22.503943]).addTo(this.map);
-    L.marker([42.0006992, 21.3780662,]).addTo(this.map);
-    L.marker([41.6321299, 22.4644241]).addTo(this.map);
-    L.marker([41.1852952, 20.6740502]).addTo(this.map);
-    L.marker([41.9816051, 20.6740502]).addTo(this.map);
-    L.marker([41.9905807, 21.4458112]).addTo(this.map);
-    L.marker([41.9132553, 22.4148662]).addTo(this.map);
-    L.marker([41.1439339, 22.5115832]).addTo(this.map);
-    L.marker([42.0080322, 20.9856536]).addTo(this.map);
-    L.marker([41.8671973, 21.9432320]).addTo(this.map);
-    L.marker([41.1245764, 20.8121635]).addTo(this.map);
-    L.marker([41.7414111, 22.1895163]).addTo(this.map);
-    L.marker([41.9693324, 22.7715819]).addTo(this.map);
-    L.marker([41.3442448, 21.5403842]).addTo(this.map);
-    L.marker([41.0200259, 21.3419312]).addTo(this.map);
-    L.marker([42.0077640, 20.9857337]).addTo(this.map);
-    L.marker([41.1439113, 22.5113730]).addTo(this.map);
-    L.marker([41.9693774, 22.7715181]).addTo(this.map);
-    L.marker([41.0201339, 21.3416538]).addTo(this.map);
+    var busicon = L.icon({
+      iconUrl: 'http://localhost:4200/assets/bus.png',
+      iconSize: [20, 20],
+    });
+    var bs_markers = L.markerClusterGroup({chunkedLoading: true});
+    this.busstations.forEach(e => {
+      bs_markers.addLayer(L.marker(L.latLng(e.lat, e.long), {icon: busicon}));
+    });
+    this.map.addLayer(bs_markers);
   }
 
   public addPublicTransportMarker() {
-    L.marker([42.1315693, 21.3087201]).addTo(this.map);
-    L.marker([42.1220983, 21.7453092]).addTo(this.map);
-    L.marker([41.0200259, 21.3419312]).addTo(this.map);
-    L.marker([41.5126683, 20.9500145]).addTo(this.map);
-    L.marker([41.3441221, 21.5380051]).addTo(this.map);
-    L.marker([41.6791638, 21.7441645]).addTo(this.map);
-    L.marker([41.1245764, 20.8121635]).addTo(this.map);
-    L.marker([41.3673960, 21.2462841]).addTo(this.map);
-    L.marker([41.1676404, 21.7378232]).addTo(this.map);
-    L.marker([41.9673061, 21.4788317]).addTo(this.map);
-    L.marker([41.1112863, 20.7984894]).addTo(this.map);
-    L.marker([41.1439339, 22.5115832]).addTo(this.map);
-    L.marker([41.0200931, 21.3430817]).addTo(this.map);
-    L.marker([41.0201369, 21.3417824]).addTo(this.map);
-    L.marker([41.0200649, 21.3417261]).addTo(this.map);
-    L.marker([41.0201637, 21.3418128]).addTo(this.map);
-    L.marker([41.0200823, 21.3421552]).addTo(this.map);
-    L.marker([41.0199192, 21.3418168]).addTo(this.map);
-    L.marker([41.0199538, 21.3417043]).addTo(this.map);
-    L.marker([41.0198933, 21.3421967]).addTo(this.map);
+    var pt_icon = L.icon({
+      iconUrl: 'http://localhost:4200/assets/bus.png',
+      iconSize: [20, 20],
+    });
+    var pt_markers = L.markerClusterGroup({chunkedLoading: true});
+    this.publictransport.forEach(e => {
+      pt_markers.addLayer(L.marker(L.latLng(e.lat, e.long), {icon: pt_icon}));
+    });
+    this.map.addLayer(pt_markers);
   }
 
   public clearMap() {
@@ -168,95 +147,70 @@ export class MapComponent implements OnInit {
   }
 
   public addFuelStationMarker() {
-    L.marker([41.0371043, 21.3478549]).addTo(this.map);
-    L.marker([42.0773617, 21.7001437]).addTo(this.map);
-    L.marker([42.1740192, 21.7085282]).addTo(this.map);
-    L.marker([42.1057063, 21.6996066]).addTo(this.map);
-    L.marker([41.0459084, 21.2895049]).addTo(this.map);
-    L.marker([41.0459412, 21.2896974]).addTo(this.map);
-    L.marker([41.0459668, 21.2895558]).addTo(this.map);
-    L.marker([41.9746802, 21.4542071]).addTo(this.map);
-    L.marker([41.4444801, 22.0053060]).addTo(this.map);
-    L.marker([41.4350263, 22.0036985]).addTo(this.map);
-    L.marker([41.4435249, 22.0059941]).addTo(this.map);
-    L.marker([41.4832253, 22.0792997]).addTo(this.map);
-    L.marker([41.4988918, 22.0987911]).addTo(this.map);
-    L.marker([41.7174030, 21.7628783]).addTo(this.map);
-    L.marker([41.4404814, 22.6659707]).addTo(this.map);
-    L.marker([41.4120197, 22.7304000]).addTo(this.map);
-    L.marker([41.4404486, 22.7050143]).addTo(this.map);
-    L.marker([41.4399258, 22.6542913]).addTo(this.map);
-    L.marker([41.9043533, 21.6544066]).addTo(this.map);
-    L.marker([42.1719716, 21.8132634]).addTo(this.map);
-
-
+    var fuelicon = L.icon({
+      iconUrl: 'http://localhost:4200/assets/fuel.png',
+      iconSize: [20, 20],
+    });
+    var fs_markers = L.markerClusterGroup({chunkedLoading: true});
+    this.fuelstations.forEach(e => {
+      fs_markers.addLayer(L.marker(L.latLng(e.lat, e.long), {icon: fuelicon}));
+    });
+    this.map.addLayer(fs_markers);
   }
 
   public addCarRentalMarker() {
-    /*for (let i=0, len = this.carrentals.length;i<len;i++)
-    {
-      let a = this.carrentals[1];
-      let b = this.carrentals[2];
-      console.log("a:"+a.lat);
-      console.log("/nb:"+a.long);
-      L.marker(L.LatLng(a.lat,a.long)).addTo(this.map);
-    }Ne pretvara vo klasa :( ahahahahha */
-    L.marker([41.0100905, 21.3549758]).addTo(this.map);
-    L.marker([42.0006985, 21.426988]).addTo(this.map);
-    L.marker([42.0006459, 21.4271085]).addTo(this.map);
-    L.marker([42.0006313, 21.4269350]).addTo(this.map);
-    L.marker([41.9601202, 21.6275954]).addTo(this.map);
-    L.marker([41.9979016, 21.4466679]).addTo(this.map);
-    L.marker([42.0005788, 21.4270554]).addTo(this.map);
-    L.marker([41.1815902, 20.7470825]).addTo(this.map);
-    L.marker([42.0020060, 21.4230372]).addTo(this.map);
-    L.marker([41.9948430, 21.4356090]).addTo(this.map);
-    L.marker([42.0019004, 21.4229514]).addTo(this.map);
-    L.marker([42.0020003, 21.4227287]).addTo(this.map);
-    L.marker([42.0021059, 21.4228145]).addTo(this.map);
-    L.marker([41.999324, 21.4283210]).addTo(this.map);
-    L.marker([42.0008066, 21.4367546]).addTo(this.map);
-    L.marker([42.0060379, 21.4151167]).addTo(this.map);
-    L.marker([42.0006386, 21.4270217]).addTo(this.map);
-    L.marker([42.0020031, 21.4228829]).addTo(this.map);
+    var cr_icon = L.icon({
+      iconUrl: 'http://localhost:4200/assets/car_rental.png',
+      iconSize: [20, 20],
+    });
+    var cr_markers = L.markerClusterGroup({chunkedLoading: true});
+    this.carrentals.forEach(e => {
+      cr_markers.addLayer(L.marker(L.latLng(e.lat, e.long), {icon: cr_icon}));
+    });
+    this.map.addLayer(cr_markers);
   }
 
   public addParkingSpotMarker() {
-    L.marker([41.9987598, 21.392087]).addTo(this.map);
-    L.marker([41.9988528, 21.3920694]).addTo(this.map);
-    L.marker([41.7360607, 22.1892539]).addTo(this.map);
-    L.marker([41.7360581, 22.1892402]).addTo(this.map);
-    L.marker([41.7360516, 22.1891631]).addTo(this.map);
-    L.marker([41.7360414, 22.1896955]).addTo(this.map);
-    L.marker([41.7360601, 22.1895512]).addTo(this.map);
-    L.marker([41.7360628, 22.189389]).addTo(this.map);
-    L.marker([41.7360383, 22.1892425]).addTo(this.map);
-    L.marker([41.7360318, 22.1891654]).addTo(this.map);
-    L.marker([41.7359931, 22.1888873]).addTo(this.map);
-    L.marker([41.7360127, 22.1888823]).addTo(this.map);
-    L.marker([41.7359843, 22.1899678]).addTo(this.map);
-    L.marker([41.7359253, 22.1904477]).addTo(this.map);
-    L.marker([41.7359253, 22.1906687]).addTo(this.map);
-    L.marker([41.7359871, 22.1908803]).addTo(this.map);
-    L.marker([41.7360843, 22.1912215]).addTo(this.map);
-    L.marker([41.7361043, 22.1912762]).addTo(this.map);
-    L.marker([41.7362257, 22.1915408]).addTo(this.map);
-    L.marker([41.738429, 22.1963449]).addTo(this.map);
-    L.marker([41.7383818, 22.1962733]).addTo(this.map);
-    L.marker([41.7382552, 22.1959003]).addTo(this.map);
-    L.marker([41.7374766, 22.1948756]).addTo(this.map);
-    L.marker([41.7375062, 22.1949219]).addTo(this.map);
-    L.marker([41.7375214, 22.1949044]).addTo(this.map);
-    L.marker([41.7373708, 22.1946698]).addTo(this.map);
-    L.marker([41.1393204, 20.788011]).addTo(this.map);
-    L.marker([42.1803058, 22.4732891]).addTo(this.map);
-    L.marker([41.7476035, 22.1863069]).addTo(this.map);
-    L.marker([41.7472643, 22.1858199]).addTo(this.map);
-    L.marker([41.7484998, 22.1822174]).addTo(this.map);
-    L.marker([41.7482755, 22.181763]).addTo(this.map);
-    L.marker([41.7604991, 22.1612161]).addTo(this.map);
-    L.marker([41.7890237, 20.9132941]).addTo(this.map);
-    L.marker([41.7360141, 22.189751]).addTo(this.map);
+    var parkingicon = L.icon({
+      iconUrl: 'http://localhost:4200/assets/parking.png',
+      iconSize: [20, 20],
+    });
+    var ps_markers = L.markerClusterGroup({chunkedLoading: true});
+    this.parkingspots.forEach(e => {
+      ps_markers.addLayer(L.marker(L.latLng(e.lat, e.long), {icon: parkingicon}));
+    });
+    this.map.addLayer(ps_markers);
+  }
 
+  public startMarker() {
+    var start_marker = L.icon({
+      iconUrl: 'http://localhost:4200/assets/start_trip.png',
+      iconSize: [40, 40],
+    });
+    this.map.once('click', <LeafletMouseEvent>(e: { latlng: any; }) => {
+      L.marker(e.latlng, {icon: start_marker}).addTo(this.map)
+    });
+  }
+
+  public endMarker() {
+    var end_marker = L.icon({
+      iconUrl: 'http://localhost:4200/assets/end_trip.png',
+      iconSize: [40, 40],
+    });
+    this.map.once('click', <LeafletMouseEvent>(e: { latlng: any; }) => {
+      L.marker(e.latlng, {icon: end_marker}).addTo(this.map)
+    });
+  }
+
+  public locateMeMarker() {
+    L.control.locate({drawMarker: true, locateOptions: {enableHighAccuracy: true}}).addTo(
+      this.map
+    ).start();
+  }
+
+  public getDirection(type: string): Observable<any> {
+    let url = 'https://api.openrouteservice.org/v2/directions/';
+
+    return this.http.get(url + 'type' + '?api_key=',)
   }
 }
