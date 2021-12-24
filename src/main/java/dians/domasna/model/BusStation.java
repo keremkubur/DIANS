@@ -1,9 +1,28 @@
 package dians.domasna.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.*;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Data
+@Entity
+@Table(name = "bus_station")
+@Getter
+@Setter
 public class BusStation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    @Column(name = "longitude", nullable = false)
     private Double Long;
+    @Column(name = "latitude", nullable = false)
     private Double Lat;
+    @Column(name = "name")
     private String name;
 
     public BusStation(java.lang.Long id, Double aLong, Double lat) {
@@ -12,35 +31,8 @@ public class BusStation {
         this.Lat = lat;
     }
 
-    public java.lang.Long getId() {
-        return Id;
+    public BusStation() {
+
     }
 
-    public void setId(java.lang.Long id) {
-        Id = id;
-    }
-
-    public Double getLong() {
-        return Long;
-    }
-
-    public void setLong(Double aLong) {
-        Long = aLong;
-    }
-
-    public Double getLat() {
-        return Lat;
-    }
-
-    public void setLat(Double lat) {
-        Lat = lat;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

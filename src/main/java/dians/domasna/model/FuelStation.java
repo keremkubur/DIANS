@@ -1,9 +1,25 @@
 package dians.domasna.model;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Data
+@Entity
+@Table(name = "fuel_station")
+@Getter
+@Setter
 public class FuelStation {
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    @Column(name = "longitude", nullable = false)
     private Double Long;
+    @Column(name = "latitude", nullable = false)
     private Double Lat;
+    @Column(name = "name")
     private String name;
 
     public FuelStation(java.lang.Long id, Double aLong, Double lat) {
@@ -12,35 +28,7 @@ public class FuelStation {
         Lat = lat;
     }
 
-    public java.lang.Long getId() {
-        return Id;
-    }
+    public FuelStation() {
 
-    public void setId(java.lang.Long id) {
-        Id = id;
-    }
-
-    public Double getLong() {
-        return Long;
-    }
-
-    public void setLong(Double aLong) {
-        Long = aLong;
-    }
-
-    public Double getLat() {
-        return Lat;
-    }
-
-    public void setLat(Double lat) {
-        Lat = lat;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

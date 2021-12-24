@@ -1,7 +1,9 @@
 package dians.domasna;
 
 import dians.domasna.DataHolder.DataHolder;
+import dians.domasna.Repository.BusStationRepository;
 import dians.domasna.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,18 +20,17 @@ import java.io.IOException;
 @ServletComponentScan
 
 public class DiansLabTestApplication implements CommandLineRunner {
-
     public static void main(String[] args) {
         SpringApplication.run(DiansLabTestApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        readBusStations();
-        readCarRental();
-        readFuelStation();
-        readParkingSpace();
-        readPublicTransport();
+        // readBusStations();
+        //readCarRental();
+        // readFuelStation();
+        // readParkingSpace();
+        //   readPublicTransport();
     }
 
     public void readBusStations() throws IOException {
