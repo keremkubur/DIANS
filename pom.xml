@@ -15,7 +15,7 @@
     <name>dians_lab_test</name>
     <description>dians_lab_test</description>
     <properties>
-        <java.version>15</java.version>
+        <java.version>11</java.version>
     </properties>
 
     <dependencies>
