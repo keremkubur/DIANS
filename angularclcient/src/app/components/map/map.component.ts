@@ -8,6 +8,8 @@ import {ParkingSpot} from "./model/parking-spot";
 import {CarRental} from "./model/car-rental";
 import {PublicTransport} from "./model/public-transport";
 import 'leaflet.locatecontrol';
+import 'leaflet.markercluster';
+import 'leaflet-boundary-canvas';
 import {config, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 

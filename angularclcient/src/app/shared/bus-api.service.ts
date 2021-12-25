@@ -12,7 +12,7 @@ import {PublicTransport} from "../components/map/model/public-transport";
 })
 export class BusAPIService {
   private bus_url = "https://spring-dians-map.herokuapp.com/api/busstation";
-  private fuel_url = "https://spring-dians-map.herokuapp.com/api/fuelstation";
+  private fuel_url = "https://spring-dians-map.herokuapp.com/api/fuelstations";
   private parkingspot_url = "https://spring-dians-map.herokuapp.com/api/parkingspace";
   private carrental_url = "https://spring-dians-map.herokuapp.com/api/carrental";
   private publictransport_url = "https://spring-dians-map.herokuapp.com/api/publictransport";
