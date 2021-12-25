@@ -119,7 +119,7 @@ export class MapComponent implements OnInit {
 
   public addBusMarker() {
     var busicon = L.icon({
-      iconUrl: 'http://localhost:4200/assets/bus.png',
+      iconUrl: 'https://angular-map-dians.herokuapp.com/assets/bus.png',
       iconSize: [20, 20],
     });
     var bs_markers = L.markerClusterGroup({chunkedLoading: true});
@@ -131,7 +131,7 @@ export class MapComponent implements OnInit {
 
   public addPublicTransportMarker() {
     var pt_icon = L.icon({
-      iconUrl: 'http://localhost:4200/assets/bus.png',
+      iconUrl: 'https://angular-map-dians.herokuapp.com/assets/bus.png',
       iconSize: [20, 20],
     });
     var pt_markers = L.markerClusterGroup({chunkedLoading: true});
@@ -148,7 +148,7 @@ export class MapComponent implements OnInit {
 
   public addFuelStationMarker() {
     var fuelicon = L.icon({
-      iconUrl: 'http://localhost:4200/assets/fuel.png',
+      iconUrl: 'https://angular-map-dians.herokuapp.com/assets/fuel.png',
       iconSize: [20, 20],
     });
     var fs_markers = L.markerClusterGroup({chunkedLoading: true});
@@ -160,7 +160,7 @@ export class MapComponent implements OnInit {
 
   public addCarRentalMarker() {
     var cr_icon = L.icon({
-      iconUrl: 'http://localhost:4200/assets/car_rental.png',
+      iconUrl: 'https://angular-map-dians.herokuapp.com/assets/car_rental.png',
       iconSize: [20, 20],
     });
     var cr_markers = L.markerClusterGroup({chunkedLoading: true});
@@ -172,7 +172,7 @@ export class MapComponent implements OnInit {
 
   public addParkingSpotMarker() {
     var parkingicon = L.icon({
-      iconUrl: 'http://localhost:4200/assets/parking.png',
+      iconUrl: 'https://angular-map-dians.herokuapp.com/assets/parking.png',
       iconSize: [20, 20],
     });
     var ps_markers = L.markerClusterGroup({chunkedLoading: true});
@@ -184,7 +184,7 @@ export class MapComponent implements OnInit {
 
   public startMarker() {
     var start_marker = L.icon({
-      iconUrl: 'http://localhost:8080/assets/start_trip.png',
+      iconUrl: 'https://angular-map-dians.herokuapp.com/assets/start_trip.png',
       iconSize: [40, 40],
     });
     this.map.once('click', <LeafletMouseEvent>(e: { latlng: any; }) => {
@@ -194,7 +194,7 @@ export class MapComponent implements OnInit {
 
   public endMarker() {
     var end_marker = L.icon({
-      iconUrl: 'http://localhost:4200/assets/end_trip.png',
+      iconUrl: 'https://angular-map-dians.herokuapp.com/assets/end_trip.png',
       iconSize: [40, 40],
     });
     this.map.once('click', <LeafletMouseEvent>(e: { latlng: any; }) => {
