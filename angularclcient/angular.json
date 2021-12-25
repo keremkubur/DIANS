@@ -38,7 +38,6 @@
               "../angularclcient/node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css"
             ],
             "scripts": [
-              "../node_modules/leaflet-boundary-canvas/src/BoundaryCanvas.js"
             ]
           },
           "configurations": {
@@ -78,10 +77,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angularclcient:build:production"
+              "browserTarget": "angularclcient:build:production",
+              "proxyConfig": "src/proxy.conf.js"
             },
             "development": {
-              "browserTarget": "angularclcient:build:development"
+              "browserTarget": "angularclcient:build:development",
+              "proxyConfig": "src/proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"
