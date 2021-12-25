@@ -33,9 +33,7 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-              "../angularclcient/node_modules/leaflet.markercluster/dist/MarkerCluster.css",
-              "../angularclcient/node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css"
+              "src/styles.css"
             ],
             "scripts": [
             ]
@@ -105,11 +103,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/assets/MarkerCluster.css",
-              "src/assets/MarkerCluster.Default.css",
-              "../angularclcient/node_modules/leaflet.markercluster/dist/MarkerCluster.css",
-              "../angularclcient/node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css"
+              "src/styles.css"
             ],
             "scripts": []
           }

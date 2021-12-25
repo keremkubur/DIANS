@@ -7,8 +7,6 @@ import {FuelStation} from "./model/fuel-station";
 import {ParkingSpot} from "./model/parking-spot";
 import {CarRental} from "./model/car-rental";
 import {PublicTransport} from "./model/public-transport";
-import 'leaflet-boundary-canvas/src/BoundaryCanvas';
-import 'leaflet.markercluster/dist/leaflet.markercluster';
 import 'leaflet.locatecontrol';
 import {config, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
@@ -184,7 +182,7 @@ export class MapComponent implements OnInit {
 
   public startMarker() {
     var start_marker = L.icon({
-      iconUrl: 'http://localhost:4200/assets/start_trip.png',
+      iconUrl: 'http://localhost:8080/assets/start_trip.png',
       iconSize: [40, 40],
     });
     this.map.once('click', <LeafletMouseEvent>(e: { latlng: any; }) => {
