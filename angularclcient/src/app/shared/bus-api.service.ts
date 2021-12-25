@@ -11,11 +11,11 @@ import {PublicTransport} from "../components/map/model/public-transport";
   providedIn: 'root'
 })
 export class BusAPIService {
-  private bus_url = "http://localhost:4200/api/busstation";
-  private fuel_url = "http://localhost:4200/api/fuelstations";
-  private parkingspot_url = "http://localhost:4200/api/parkingspace";
-  private carrental_url = "http://localhost:4200/api/carrental";
-  private publictransport_url = "http://localhost:4200/api/publictransport";
+  private bus_url = "http://spring-dians-map.herokuapp.com/api/busstation";
+  private fuel_url = "http://spring-dians-map.herokuapp.com/api/fuelstation";
+  private parkingspot_url = "http://spring-dians-map.herokuapp.com/api/parkingspace";
+  private carrental_url = "http://spring-dians-map.herokuapp.com/api/carrental";
+  private publictransport_url = "http://spring-dians-map.herokuapp.com/api/publictransport";
 
   constructor(private http: HttpClient) {
   }
