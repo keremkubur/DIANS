@@ -12,7 +12,8 @@ import 'leaflet.markercluster';
 import 'leaflet-boundary-canvas';
 import {config, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-
+import {environment} from "../../../environments/environment";
+import {GeoJSON} from "geojson";
 declare const L: any;
 
 @Component({
@@ -23,6 +24,8 @@ declare const L: any;
 export class MapComponent implements OnInit {
 
   private map: L.Map;
+  private start_latlng: L.LatLng;
+  private end_latlng: L.LatLng
   busstations: BusStation[] = [];
   fuelstations: FuelStation[] = [];
   parkingspots: ParkingSpot[] = [];
@@ -189,6 +192,7 @@ export class MapComponent implements OnInit {
     });
     this.map.once('click', <LeafletMouseEvent>(e: { latlng: any; }) => {
       L.marker(e.latlng, {icon: start_marker}).addTo(this.map)
+      this.start_latlng=e.latlng;
     });
   }
 
@@ -199,6 +203,7 @@ export class MapComponent implements OnInit {
     });
     this.map.once('click', <LeafletMouseEvent>(e: { latlng: any; }) => {
       L.marker(e.latlng, {icon: end_marker}).addTo(this.map)
+      this.end_latlng= e.latlng;
     });
   }
 
@@ -208,9 +213,52 @@ export class MapComponent implements OnInit {
     ).start();
   }
 
-  public getDirection(type: string): Observable<any> {
+  public getDirection(type: string) {
     let url = 'https://api.openrouteservice.org/v2/directions/';
+    let example = 'https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248879fb070905a45218492c610f4d6ed60&start=8.681495,49.41461&end=8.687872,49.420318'
+    this.http.get<JSON>(
+     example).subscribe(
 
-    return this.http.get(url + 'type' + '?api_key=',)
+      res => {
+        console.log(res)
+      },
+      error => {
+        alert(error.type);
+        console.log(error.stringify)
+
+      });
+   /* return this.http.get<JSON>(url +'foot-walking' + '?api_key='+environment.taenkluc+'&start='+this.start_latlng.lat+','+this.start_latlng.lng+"&end="+this.end_latlng.lat+','+this.end_latlng.lng).subscribe(
+      res => {
+      console.log(res)
+    },
+    error => {
+      alert(error.type);
+      console.log(error.stringify)
+
+    });*/
+  }
+  getLocation(): void{
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position)=>{
+        const longitude = position.coords.longitude;
+        const latitude = position.coords.latitude;
+        this.getWeather(longitude.toString(), latitude.toString());
+      });
+    } else {
+      console.log("No support for geolocation")
+    }
+  }
+  public getWeather(long:string,lat:string)
+  {
+    let url1 = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+'&lon='+long+"&appid=e1c149b903a27102c4b6ee74956254d0";
+    console.log(L.control.locate());
+    fetch(url1,)
+      .then(response => response.json())
+      .then(function (response){
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log('error',error)
+      })
   }
 }

@@ -24,6 +24,7 @@
     "@types/leaflet-draw": "^1.0.5",
     "@types/leaflet.locatecontrol": "^0.74.0",
     "@types/leaflet.markercluster": "^1.4.6",
+    "angular2-weather-widget": "^1.0.1",
     "dotenv": "^10.0.0",
     "enhanced-resolve": "^3.3.0",
     "express": "^4.17.2",

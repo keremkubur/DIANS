@@ -4,9 +4,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MapComponent} from "./components/map/map.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {NgxCsvParserModule} from "ngx-csv-parser";
 import {Routes, RouterModule} from "@angular/router";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AngularWeatherWidgetModule} from "angular2-weather-widget";
+
 
 @NgModule({
     declarations: [
@@ -17,10 +18,11 @@ import {HttpClientModule} from "@angular/common/http";
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        NgxCsvParserModule,
-        HttpClientModule
+        HttpClientModule,
+        AngularWeatherWidgetModule,
     ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

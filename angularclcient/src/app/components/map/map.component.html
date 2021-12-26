@@ -12,11 +12,35 @@
 
   </div>
 
-
   <div class="button1">
     <button (click)="addParkingSpotMarker()" class="button1">Најди паркинг место</button>
   </div>
-
+  <angular-weather-widget class="weather" [hidden]="true"
+    [APIKEY]="'e1c149b903a27102c4b6ee74956254d0'"
+    [width]="'380px'"
+    [height]="'auto'"
+    [backgroundColor]="'green'"
+    [isBoxShadow]="true"
+    [borderRadius]="'5px'"
+    [locationFontSize]="'35px'"
+    [locationFontColor]="'#fff'"
+    [status]="true"
+    [statusFontColor]="'#fff'"
+    [statusFontSize]="'18px'"
+    [temperature]="true"
+    [tempratureFontColor]="'#fff'"
+    [tempratureFontSize]="'75px'"
+    [weatherImages]="true"
+    [weatherImageWidth]="'110px'"
+    [weatherImageHeight]="'110px'"
+    [geoLocation]="true"
+    [location]="'Skopje'"
+    [isWind]="true"
+    [windFontColor]="'#fff'"
+    [windFontSize]="'17px'"
+    [humidityFontColor]="'#fff'"
+    [humidityFontSize]="'17px'">
+  </angular-weather-widget>
   <pre></pre>
   <div class="button1">
     <button (click)="addFuelStationMarker()" class="button1">Најди бензинска станица</button>
@@ -28,7 +52,7 @@
   <pre></pre>
 
   <div class="button1">
-    <button (click)="addBusMarker() " class="button1">Најди автобуска станица</button>
+    <button (click)="addBusMarker()" class="button1">Најди автобуска станица</button>
   </div>
   <pre></pre>
   <div class="button1">
@@ -46,6 +70,9 @@
   </div>
   <div class="button2">
     <button (click)="locateMeMarker()" class="button2">locate Point</button>
+  </div>
+  <div class="weather">
+    <button (click)= class="button2">Clear Map</button>
   </div>
   <pre></pre>
   <pre></pre>
