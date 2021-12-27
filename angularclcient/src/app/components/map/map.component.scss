@@ -10,7 +10,12 @@
   z-index: 0;
   //margin: 30px;
 }
+.welcome{
+  font-size: 20px;
+  color: #125699;
+  font-family: "Berlin Sans FB Demi";
 
+}
 .button2 {
   width: 150px;
   background-color: #125699;
@@ -19,8 +24,9 @@
   padding: 10px 15px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
+  display: inline;
+  font-size: 15px;
+  margin-right: 5px;
 }
 
 .button1 {
@@ -32,7 +38,7 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 20px;
+  font-size: 23px;
 }
 
 .map-frame {
@@ -45,6 +51,7 @@
 }
 
 .w3-container {
+  background-image: linear-gradient(to bottom right,ghostwhite,#ace5ee,ghostwhite);
   position: absolute;
   width: 350px;
   height: 940px;
@@ -90,6 +97,26 @@
 
 .marker-cluster-medium div {
   background-color: rgba(240, 194, 12, 0.6);
+}
+
+.weatherr {
+  position: absolute;
+  width: 178px;
+  height: 200px;
+  top: 10px;
+  right: 15px;
+  z-index: 1;
+  background-color: ghostwhite;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: left;
+  font-family: 'Roboto', 'sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center
 }
 
 .marker-cluster-large {

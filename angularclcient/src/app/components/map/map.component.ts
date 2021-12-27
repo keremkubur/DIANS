@@ -250,7 +250,7 @@ export class MapComponent implements OnInit {
   }
   public getWeather(long:string,lat:string)
   {
-    let url1 = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+'&lon='+long+"&appid=e1c149b903a27102c4b6ee74956254d0";
+    let url1 = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+'&lon='+long+"&appid=e1c149b903a27102c4b6ee74956254d0"+"&units=metric";
     console.log(L.control.locate());
     fetch(url1,)
       .then(response => response.json())

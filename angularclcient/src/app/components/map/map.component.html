@@ -4,84 +4,86 @@
     <div id="map"></div>
   </div>
 </div>
-<div class="w3-container w3-teal">
-  <div class="welcome">
-    <h1>Како може да помогнеме?</h1>
-    <pre></pre>
-    <pre></pre>
-
-  </div>
-
-  <div class="button1">
-    <button (click)="addParkingSpotMarker()" class="button1">Најди паркинг место</button>
-  </div>
-  <angular-weather-widget class="weather" [hidden]="true"
-    [APIKEY]="'e1c149b903a27102c4b6ee74956254d0'"
-    [width]="'380px'"
-    [height]="'auto'"
-    [backgroundColor]="'green'"
-    [isBoxShadow]="true"
-    [borderRadius]="'5px'"
-    [locationFontSize]="'35px'"
-    [locationFontColor]="'#fff'"
-    [status]="true"
-    [statusFontColor]="'#fff'"
-    [statusFontSize]="'18px'"
-    [temperature]="true"
-    [tempratureFontColor]="'#fff'"
-    [tempratureFontSize]="'75px'"
-    [weatherImages]="true"
-    [weatherImageWidth]="'110px'"
-    [weatherImageHeight]="'110px'"
-    [geoLocation]="true"
-    [location]="'Skopje'"
-    [isWind]="true"
-    [windFontColor]="'#fff'"
-    [windFontSize]="'17px'"
-    [humidityFontColor]="'#fff'"
-    [humidityFontSize]="'17px'">
+<div class="weatherr">
+  <angular-weather-widget class="weather" [hidden]="false"
+                          [APIKEY]="'e1c149b903a27102c4b6ee74956254d0'"
+                          [width]="'180px'"
+                          [height]="'auto'"
+                          [backgroundColor]="'#125699'"
+                          [isBoxShadow]="true"
+                          [borderRadius]="'5px'"
+                          [locationFontSize]="'35px'"
+                          [locationFontColor]="'#fff'"
+                          [status]="true"
+                          [statusFontColor]="'#fff'"
+                          [statusFontSize]="'14px'"
+                          [temperature]="true"
+                          [tempratureFontColor]="'#fff'"
+                          [tempratureFontSize]="'45px'"
+                          [weatherImages]="false"
+                          [weatherImageWidth]="'100px'"
+                          [weatherImageHeight]="'100px'"
+                          [geoLocation]="true"
+                          [location]="'Skopje'"
+                          [isWind]="true"
+                          [windFontColor]="'#fff'"
+                          [windFontSize]="'17px'"
+                          [humidityFontColor]="'#fff'"
+                          [humidityFontSize]="'17px'">
   </angular-weather-widget>
+</div>
+<div class="w3-container w3-teal">
   <pre></pre>
-  <div class="button1">
-    <button (click)="addFuelStationMarker()" class="button1">Најди бензинска станица</button>
+  <pre></pre>
+  <pre></pre>
+  <div class="welcome">
+    <p style="font-size: 33px"><b>How can we help you?</b></p>
+    <pre></pre>
+    <pre></pre>
+
   </div>
-  <pre></pre>
+
   <div class="button1">
-    <button (click)="addCarRentalMarker()" class="button1">Најди место за изнајмување на кола</button>
+    <button (click)="addParkingSpotMarker()" class="button1">Find Parking Space</button>
   </div>
   <pre></pre>
 
   <div class="button1">
-    <button (click)="addBusMarker()" class="button1">Најди автобуска станица</button>
+    <button (click)="addFuelStationMarker()" class="button1">Find Fuel Station</button>
+  </div>
+  <pre></pre>
+
+  <div class="button1">
+    <button (click)="addCarRentalMarker()" class="button1">Find CarRental</button>
+  </div>
+  <pre></pre>
+
+  <div class="button1">
+    <button (click)="addBusMarker()" class="button1">Find Bus Station</button>
   </div>
   <pre></pre>
   <div class="button1">
-    <button (click)="addPublicTransportMarker()" class="button1">Најди станица за јавен превоз</button>
+    <button (click)="addPublicTransportMarker()" class="button1">Find Public Transport</button>
   </div>
   <pre></pre>
+
   <div class="button2">
     <button (click)="clearMap()" class="button2">Clear Map</button>
   </div>
+  <pre></pre>
   <div class="button2">
     <button (click)="startMarker()" class="button2">Start Point</button>
   </div>
+  <pre></pre>
   <div class="button2">
     <button (click)="endMarker()" class="button2">End Point</button>
   </div>
+  <pre></pre>
   <div class="button2">
-    <button (click)="locateMeMarker()" class="button2">locate Point</button>
-  </div>
-  <div class="weather">
-    <button (click)= class="button2">Clear Map</button>
+    <button (click)="locateMeMarker()" class="button2">Locate Point</button>
   </div>
   <pre></pre>
-  <pre></pre>
-  <pre></pre>
-  <pre></pre>
-  <pre></pre>
-  <pre></pre>
-  <pre></pre>
-  <h5>Prototype 1.1</h5>
 </div>
+
 
 
